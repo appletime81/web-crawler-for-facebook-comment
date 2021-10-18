@@ -1,0 +1,25 @@
+* {
+    border: 1px solid black;
+}
+
+.title-part {
+    color: #32b088;
+    text-align: center;
+}
+
+.container {
+    /*max-width: 900px;*/
+    margin: 0 auto;
+}
+
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col {
+    width: calc(100% / 3);
+    padding: 15px;
+}
+
