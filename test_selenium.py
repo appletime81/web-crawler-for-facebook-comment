@@ -54,13 +54,18 @@ def get_posts(driver):
         except:
             pass
 
+    prefix_url = 'https://www.facebook.com/groups/999385510116409/posts/'
     post_ids = list(set(post_ids))
+    post_urls = [prefix_url + post_id for post_id in post_ids]
+    post_urls = sorted(post_urls, key=lambda x: int(x.split('/')[-1]))
     print('******************************************************')
     print(len(post_ids))
-    pprint(post_ids)
+    pprint(post_urls)
 
 
 if __name__ == '__main__':
     driver = browser_action()
     get_posts(driver)
+    # a =  'https://www.facebook.com/groups/999385510116409/posts/4116814041706858'
+    # print(a.split('/')[-1])
 
