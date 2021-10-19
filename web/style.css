@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    border: 1px  solid black;
+    /*border: 1px  solid black;*/
 }
 
 body {
@@ -23,7 +23,10 @@ body {
 
 .col {
     width: calc(100% / 1);
-    padding: 200px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 100px;
+    padding-right: 100px;
 }
 
 input {
