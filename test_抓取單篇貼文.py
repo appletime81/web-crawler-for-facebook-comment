@@ -15,7 +15,11 @@ prefs = {
 options.add_experimental_option('prefs', prefs)
 options.add_argument('disable-infobars')
 options.add_argument('--window-size=1920,1080')
-driver = webdriver.Chrome('./chromedriver', options=options)
+driver = webdriver.Chrome('./chromedriver.exe', options=options)
+
+# global variables
+comment_type_list = ['最相關留言', '最新', '所有留言']
+
 
 
 def browser_action():
@@ -34,8 +38,8 @@ def browser_action():
     driver.find_element_by_xpath('//*[@id="login_form"]/div[2]/div[3]/div/div/div[1]/div/span/span').click()
 
     # 把所有留言點擊出來
-    time.sleep(5)
-    all_comment_btn = driver.find_elements_by_css_selector("span.d2edcug0.hpfvmrgz.qv66sw1b.c1et5uql.oi732d6d.ik7dh3pa.ht8s03o8.a8c37x1j.keod5gw0.nxhoafnm.aigsh9s9.d9wwppkn.fe6kdd0r.mau55g9w.c8b282yb.iv3no6db.jq4qci2q.a3bd9o3v.lrazzd5p.m9osqain")
+    time.sleep(10)
+    all_comment_btn = driver.find_elements_by_css_selector("span.d2edcug0.hpfvmrgz.qv66sw1b")
     print(all_comment_btn)
     for i in all_comment_btn:
         print(i.text)
