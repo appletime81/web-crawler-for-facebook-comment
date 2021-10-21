@@ -1,6 +1,14 @@
 import eel
 
-# Set web files folder and optionally specify which file types to check for eel.expose()
-#   *Default allowed_extensions are: ['.js', '.html', '.txt', '.htm', '.xhtml']
-eel.init('web', allowed_extensions=['.js', '.html'])
+# from get_latest_post import get_recent_posts
+
+
+eel.init('web')
+
+
+@eel.expose
+def get_input_url(group_url):
+    print(f'group url: {group_url}')
+
+
 eel.start('index.html', port=5000)
