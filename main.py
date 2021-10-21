@@ -11,4 +11,4 @@ def get_input_url(group_url):
     print(f'group url: {group_url}')
 
 
-eel.start('index.html', port=5000)
+eel.start('index.html', size=(800, 800), port=5000)

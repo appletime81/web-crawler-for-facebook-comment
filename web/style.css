@@ -44,3 +44,7 @@ input {
     background-color: #32b088;
     border-radius: 50px;
 }
+
+.input-area-for-col-num {
+    width: 15%;
+}
