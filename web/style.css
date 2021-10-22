@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    /*border: 1px  solid black;*/
+
 }
 
 body {
@@ -43,6 +43,11 @@ input {
     margin-top: 10px;
     background-color: #32b088;
     border-radius: 50px;
+    border: none;
+}
+
+.btn:hover {
+    border: 3px solid #008cff;
 }
 
 .input-area-for-col-num {
