@@ -6,7 +6,7 @@ function getGroupUrl() {
     for (let i = 0; i < urls_len; i++) {
         url_list.push(urls[i].value)
     }
-    eel.get_input_url(url_list);
+    eel.main(url_list);
 }
 
 function genInputForm() {
