@@ -32,19 +32,45 @@ def browser_action():
     time.sleep(1)
 
     post_present_method_btns = driver.find_elements_by_css_selector('span.d2edcug0.hpfvmrgz.qv66sw1b')
+
     for btn in post_present_method_btns:
         try:
-            if btn.text == '最新動態':
+            if btn.text == '最新貼文':
                 btn.click()
+
+                print('-----------------------')
+                print(btn.__dict__)
                 break
         except Exception:
             pass
     time.sleep(1)
     # -------------------------
 
-    for i in range(3):
+    for i in range(10):
         driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
         time.sleep(1)
+
+    elems = driver.find_elements_by_css_selector("a.oajrlxb2.g5ia77u1.qu0x051f.esr5mh6w.e9989ue4.r7d6kgcz.rq0escxv")
+
+    links = list()
+    for elem in elems:
+        try:
+            links.append(elem.get_attribute('href'))
+        except Exception:
+            pass
+    # links = [elem.get_attribute('href') for elem in elems]
+    new_links = list()
+    for link in links:
+        try:
+            if 'posts' in link:
+                new_links.append(link.split("/")[6])
+        except Exception:
+            pass
+
+    new_links = list(set(new_links))
+    new_links = sorted(new_links, key=lambda x: int(x), reverse=True)
+    new_links = ['https://www.facebook.com/groups/999385510116409/posts/' + link for link in new_links]
+    pprint(new_links)
 
 
 def get_posts(prefix_url):
@@ -71,5 +97,5 @@ def get_recent_posts():
 
 if __name__ == '__main__':
     browser_action()
-    post_urls = get_posts(prefix_url=None)
-    pprint(post_urls)
+    # post_urls = get_posts(prefix_url=None)
+    # pprint(post_urls)
