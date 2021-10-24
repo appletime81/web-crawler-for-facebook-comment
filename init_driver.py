@@ -3,13 +3,13 @@ from selenium import webdriver
 
 def init_driver():
     options = webdriver.ChromeOptions()
-
     # 關閉通知
     prefs = {
         'profile.default_content_setting_values':
             {
                 'notifications': 2
-            }
+            },
+        'download.default_directory': '/Users/timeapple/Documents/GitHub/web-crawler-for-facebook-comment'
     }
     options.add_experimental_option('prefs', prefs)
     options.add_argument('disable-infobars')
