@@ -50,12 +50,26 @@ def browser_action():
     for i in range(10):
         driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
         time.sleep(1)
-    time.sleep(10)
-    pyautogui.hotkey('command', 's')
-    pyautogui.hotkey('command', 's')
-    time.sleep(10)
-    pyautogui.press('enter')
-    time.sleep(10)
+
+
+
+    # btns = driver.find_elements_by_tag_name('span')
+    # for btn in btns:
+    #     try:
+    #         if '天' in btn.text or '日' in btn.text or '下午' in btn.text or '分鐘' in btn.text:
+    #             # driver.execute_script("arguments[0].click();", btn)
+    #             print(btn.text)
+    #             # print(driver.page_source)
+    #     except:
+    #         pass
+
+
+    # time.sleep(10)
+    # pyautogui.hotkey('command', 's')
+    # pyautogui.hotkey('command', 's')
+    # time.sleep(10)
+    # pyautogui.press('enter')
+    # time.sleep(10)
 
     # elems = driver.find_elements_by_css_selector("a.oajrlxb2.g5ia77u1.qu0x051f.esr5mh6w.e9989ue4.r7d6kgcz.rq0escxv")
     #

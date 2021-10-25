@@ -1,3 +1,6 @@
-text = "https://www.facebook.com/groups/999385510116409/posts/4371284809593112/?comment_id=4373331176055142&__cft__[0]=AZWz1dyjFqKgQuWAola4bzdqOI8XectU3sgCAAOLg3M1ss2QkTCbOKt8RaMz8bE1bPf154E4FrZPMVeTxnUa43US9QhrBWO3V9J8o54ycLKsrzPyGYshB8dwdY4gm5pxxqN8aRpHs7EsIdeaswbil5WaTvEl46RAnf4HUU-Dt1Rfl6Np_LJ-_-heOAUqs1cu5io&__tn__=R]-R"
-text_lst = text.split("/")
-print(text_lst)
+a = '{"linkdata":"qid.-7536713570123153275:mf_story_key.4298734363514824:top_level_post_id.4298734363514824:tl_objid.4298734363514824:content_owner_id_new.100044241828961:page_id.100044241828961:src.22:story_location.6:story_attachment_style.photo:filter.GroupStoriesByActivityEntQuery:ott.AX_jEVs6TJVLYw4m:tds_flgs.3:page_insights.{\"100044241828961\":{\"page_id\":100044241828961,\"page_id_type\":\"page\",\"actor_id\":100044241828961,\"dm\":{\"isShare\":0,\"originalPostOwnerID\":0},\"psn\":\"EntGroupMallPostCreationStory\",\"post_context\":{\"object_fbtype\":657,\"publish_time\":1632471005,\"story_name\":\"EntGroupMallPostCreationStory\",\"story_fbid\":[4298734363514824]},\"role\":1,\"sl\":6,\"targets\":[{\"actor_id\":100044241828961,\"page_id\":100044241828961,\"post_id\":4298734363514824,\"role\":1,\"share_id\":0}]},\"999385510116409\":{\"page_id\":999385510116409,\"page_id_type\":\"group\",\"actor_id\":100044241828961,\"dm\":{\"isShare\":0,\"originalPostOwnerID\":0},\"psn\":\"EntGroupMallPostCreationStory\",\"post_context\":{\"object_fbtype\":657,\"publish_time\":1632471005,\"story_name\":\"EntGroupMallPostCreationStory\",\"story_fbid\":[4298734363514824]},\"role\":1,\"sl\":6}}","feedback_target":4298734363514824,"feedback_source":2,"action_source":0,"actor_id":100003824025972}'
+a = a.split('.')[2].split(':')[0]
+
+print(a)
+
+
