@@ -53,3 +53,7 @@ input {
 .input-area-for-col-num {
     width: 15%;
 }
+
+.label-input-num {
+    margin-bottom: 10px;
+}
