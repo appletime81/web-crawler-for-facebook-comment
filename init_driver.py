@@ -14,7 +14,10 @@ def init_driver():
     options.add_experimental_option('prefs', prefs)
     options.add_argument('disable-infobars')
     options.add_argument('--window-size=1920,1080')
-    driver = webdriver.Chrome('./chromedriver', options=options)
+    try:
+        driver = webdriver.Chrome('./chromedriver', options=options)
+    except:
+        driver = webdriver.Chrome('./chromedriver.exe', options=options)
     return driver
 
 
