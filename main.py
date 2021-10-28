@@ -22,8 +22,6 @@ def main(group_urls):
     status = 'Done'
 
 
-
-
 def filter_url(group_urls):  # 去掉為輸入的欄位傳進的空值
     group_urls = [url for url in group_urls if url != '']
     return group_urls
