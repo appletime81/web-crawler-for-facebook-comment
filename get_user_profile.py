@@ -1,12 +1,16 @@
-from init_driver import driver
 from bs4 import BeautifulSoup
 import time
+import re
+from pprint import pprint
 
 # global variables
 comment_type_list = ['最相關留言', '最新', '所有留言']
 
 
 def browse_post(driver, url):
+    if 'groups' not in url:
+        url = url.replace('www.', 'm.')
+
     driver.get(url)
     time.sleep(2)  # 等待網頁跑完
 
@@ -28,10 +32,15 @@ def browse_post(driver, url):
                             while ctrl:
                                 show_all_comment_btn = driver.find_elements_by_css_selector("span.d2edcug0.hpfvmrgz.qv66sw1b")
                                 ctrl = detect_more_comment(driver, show_all_comment_btn)
-                    except Exception:
-                        pass
-        except Exception:
-            pass
+                    except Exception as e:
+                        print(e)
+            else:
+                ctrl = 1
+                while ctrl:
+                    show_all_comment_btn = driver.find_elements_by_css_selector("span.d2edcug0.hpfvmrgz.qv66sw1b")
+                    ctrl = detect_more_comment(driver, show_all_comment_btn)
+        except Exception as e:
+            print(e)
 
 
 def detect_more_comment(driver, show_all_comment_btn):
@@ -57,29 +66,44 @@ def detect_more_comment(driver, show_all_comment_btn):
 
                     time.sleep(0.5)
                     count += 1
-        except:
-            pass
+        except Exception as e:
+            print(e)
     return count
 
 
-def get_users(driver, post_id):
+def get_users(driver, post_id, post_url, index):
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     tags = soup.select('a')
     users = list()
     for tag in tags:
         try:
-            if '/user/' in tag.get('href'):
-                users.append(tag.get('href'))
+            if 'group' in post_url:
+                if '/user/' in tag.get('href'):
+                    users.append(tag.get('href'))
+            else:
+                if 'fref=nf&rc=p&__tn__=R' in tag.get('href'):
+                    users.append(tag.get('href'))
         except Exception:
             pass
-
     user_profile_list = list()
-    for user in users:
-        user_text_list = user.split('/')
-        user_id_index = user_text_list.index('user') + 1
-        user_profile_list.append(f'https://www.facebook.com/profile.php?id={user_text_list[user_id_index]}\n')
+    if 'group' in post_url:
+        for user in users:
+            if 'user' in user:
+                user_text_list = user.split('/')
+                user_id_index = user_text_list.index('user') + 1
+                user_profile_list.append(f'https://www.facebook.com/profile.php?id={user_text_list[user_id_index]}\n')
+            # else:
+            #     id = re.search('id=\d+', user)[0]
+            #     user_profile_list.append(f'https://www.facebook.com/profile.php?{id}\n')
+    else:
+        for user in users:
+            user_profile_list.append(f'https://www.facebook.com{user}\n')
 
     user_profile_list = list(set(user_profile_list))
-    with open(f'{post_id}.txt', 'w') as f:
+
+    print('-------------------------')
+    pprint(user_profile_list)
+
+    with open(f'{index}/{post_id}.txt', 'w') as f:
         f.writelines(user_profile_list)
 

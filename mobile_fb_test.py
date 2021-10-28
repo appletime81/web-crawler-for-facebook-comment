@@ -1,18 +1,19 @@
 from init_driver import driver
-from bs4 import BeautifulSoup
 from get_user_profile import browse_post, get_users
+from get_group_url import get_group_url
 from pprint import pprint
 import time
 
-GROUP_URL = 'https://m.facebook.com/groups/999385510116409'
 
-
-def browser_action():
+def browser_action(group_url):
     # open facebook
-    driver.get(GROUP_URL)
+    driver.get(group_url)
 
     # 點擊登入按鈕
-    driver.find_element_by_xpath('//*[@id="mobile_login_bar"]/div[2]/a[1]').click()
+    try:
+        driver.find_element_by_xpath('//*[@id="mobile_login_bar"]/div[2]/a[1]').click()
+    except:
+        driver.find_element_by_xpath('//*[@id="mobile_login_bar"]/div[2]/div/a[1]').click()
     time.sleep(2)
 
     # 輸入帳密
@@ -43,13 +44,15 @@ def browser_action():
     return post_ids
 
 
-def generate_post_url():
-    post_ids = browser_action()
-    post_urls = [f'https://www.facebook.com/groups/999385510116409/{post_id}' for post_id in post_ids]
+def generate_post_url(group_url, index):
+    post_ids = browser_action(group_url)
+    post_urls = [f'{group_url.replace("m.", "www.")}/posts/{post_id}' for post_id in post_ids]
     for i, post_url in enumerate(post_urls):
         browse_post(driver, post_url)
-        get_users(driver, post_ids[i])
+        get_users(driver, post_ids[i], post_url, index)
 
 
-if __name__ == '__main__':
-    generate_post_url()
+# if __name__ == '__main__':
+#     group_urls = get_group_url(['https://www.facebook.com/youngAug24'])
+#     for group_url in group_urls:
+#         generate_post_url(group_url)

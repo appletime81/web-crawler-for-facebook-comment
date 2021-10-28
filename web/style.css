@@ -57,3 +57,7 @@ input {
 .label-input-num {
     margin-bottom: 10px;
 }
+
+#status-text {
+   color: blue;
+}

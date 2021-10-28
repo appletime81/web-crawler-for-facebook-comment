@@ -1,12 +1,13 @@
 function getGroupUrl() {
-    const url_list = [];
-    const urls = document.getElementsByName("group_url");
-    const urls_len = urls.length;
+    const url_list = []
+    const urls = document.getElementsByName("group_url")
+    const urls_len = urls.length
 
     for (let i = 0; i < urls_len; i++) {
         url_list.push(urls[i].value)
     }
-    eel.main(url_list);
+    eel.main(url_list)
+    printStatus()
 }
 
 function genInputForm() {
@@ -18,6 +19,19 @@ function genInputForm() {
     }
     form += "<button type='button' class='btn' onclick='getGroupUrl()'>Enter</button>"
     form += "</form>"
-    var div = document.getElementById("form-part");
+    var div = document.getElementById("form-part")
     div.innerHTML = form
+}
+
+// async function printStatus() {
+//     var statusText = await eel.print_processing_status()()
+//     var div = document.getElementById("status-text");
+//     div.innerHTML = statusText
+// }
+function printStatus() {
+    function wrapper(statusText) {
+        var div = document.getElementById("status-text")
+        div.innerHTML = statusText
+    }
+    eel.print_processing_status()(wrapper)
 }

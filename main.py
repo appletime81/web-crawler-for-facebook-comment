@@ -1,24 +1,32 @@
 import eel
-
-# from get_latest_post import get_recent_posts
-
+from mobile_fb_test import *
 
 eel.init('web')
 
+status = 'Ready to Start'
+
 
 @eel.expose
-def main(group_url):
-    group_url = filter_url(group_url)
-    print_url(group_url)
+def print_processing_status():
+    global status
+    return status
 
 
-def print_url(group_url):
-    print(group_url)
+@eel.expose
+def main(group_urls):
+    global status
+    group_urls = filter_url(group_urls)
+    status = 'Processing....'
+    for i, group_url in enumerate(group_urls):
+        generate_post_url(group_url, i + 1)
+    status = 'Done'
 
 
-def filter_url(group_url):  # 去掉為輸入的欄位傳進的空值
-    group_url = [url for url in group_url if url != '']
-    return group_url
 
 
-eel.start('index.html', size=(800, 800), port=5000)
+def filter_url(group_urls):  # 去掉為輸入的欄位傳進的空值
+    group_urls = [url for url in group_urls if url != '']
+    return group_urls
+
+
+eel.start('index.html', size=(800, 800), port=8080)
