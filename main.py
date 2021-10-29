@@ -1,5 +1,5 @@
 import eel
-from mobile_fb_test import *
+from web_crawler_main import *
 
 eel.init('web')
 
@@ -18,7 +18,12 @@ def main(group_urls):
     group_urls = filter_url(group_urls)
     status = 'Processing....'
     for i, group_url in enumerate(group_urls):
+        try:
+            os.mkdir(str(i + 1))
+        except Exception:
+            pass
         generate_post_url(group_url, i + 1)
+
     status = 'Done'
 
 

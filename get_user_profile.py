@@ -89,13 +89,15 @@ def get_users(driver, post_id, post_url, index):
     user_links = driver.find_elements_by_css_selector("a.oajrlxb2.g5ia77u1.qu0x051f")
     # get_attribute('href')
     user_profile_list = list()
-    if 'group' in post_url:  # 抓取社團
+    if 'groups/' in post_url:  # 抓取社團
         for user_link in user_links:
             try:
                 link = user_link.get_attribute('href')
-                if re.search('id=\d+', link):
-                    id = re.search('id=\d+', link)[0]
-                    user_profile_list.append(f'https://www.facebook.com/profile.php?{id}\n')
+                if 'groups' in link and 'user' in link:
+                    if re.search('user/\d+', link):
+                        id = re.search('user/\d+', link)[0]
+                        id = id.split('/')[1]
+                        user_profile_list.append(f'https://www.facebook.com/profile.php?id={id}\n')
             except Exception:
                 pass
     else:  # 抓取個人粉專
