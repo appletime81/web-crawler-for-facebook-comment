@@ -85,6 +85,42 @@ def detect_more_comment(driver, show_all_comment_btn):
     return count
 
 
+# def get_users(driver, post_id, post_url, index):
+#     soup = BeautifulSoup(driver.page_source, 'html.parser')
+#     tags = soup.select('a')
+#     users = list()
+#     for tag in tags:
+#         try:
+#             if 'group' in post_url:
+#                 if '/user/' in tag.get('href'):
+#                     users.append(tag.get('href'))
+#             else:
+#                 if 'fref=nf&rc=p&__tn__=R' in tag.get('href'):
+#                     users.append(tag.get('href'))
+#         except Exception:
+#             pass
+#     user_profile_list = list()
+#     if 'group' in post_url:
+#         for user in users:
+#             if 'user' in user:
+#                 user_text_list = user.split('/')
+#                 user_id_index = user_text_list.index('user') + 1
+#                 user_profile_list.append(f'https://www.facebook.com/profile.php?id={user_text_list[user_id_index]}\n')
+#             # else:
+#             #     id = re.search('id=\d+', user)[0]
+#             #     user_profile_list.append(f'https://www.facebook.com/profile.php?{id}\n')
+#     else:
+#         for user in users:
+#             user_profile_list.append(f'https://www.facebook.com{user}\n')
+#
+#     user_profile_list = list(set(user_profile_list))
+#
+#     print('-------------------------')
+#     pprint(user_profile_list)
+#
+#     with open(f'{index}/{post_id}.txt', 'w') as f:
+#         f.writelines(user_profile_list)
+
 def get_users(driver, post_id, post_url, index):
     user_links = driver.find_elements_by_css_selector("a.oajrlxb2.g5ia77u1.qu0x051f")
     # get_attribute('href')
