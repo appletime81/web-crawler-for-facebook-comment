@@ -22,8 +22,7 @@ def main(group_urls):
             os.mkdir(str(i + 1))
         except Exception:
             pass
-        generate_post_url(group_url, i + 1)
-
+        generate_result(group_url, i + 1)
     status = 'Done'
 
 

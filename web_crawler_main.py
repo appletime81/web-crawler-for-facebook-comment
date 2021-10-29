@@ -1,13 +1,13 @@
 import os
 
-from init_driver import driver
+from init_driver import init_driver
 from get_user_profile import browse_post, get_users
 from get_group_url import get_group_url
 from pprint import pprint
 import time
 
 
-def browser_action(group_url, index):
+def browser_action(driver, group_url, index):
     # open facebook
     driver.get(group_url)
 
@@ -60,9 +60,11 @@ def browser_action(group_url, index):
 
 
 def generate_result(group_url, index):
+    driver = init_driver()
+
     # 抓取post url，並排序
     group_url = group_url.replace("www.", "m.")
-    post_ids = browser_action(group_url, index)
+    post_ids = browser_action(driver, group_url, index)
     post_urls = [f'{group_url.replace("m.", "www.")}/posts/{post_id}' for post_id in post_ids]
 
     # 抓取用戶名稱，並儲存

@@ -19,6 +19,3 @@ def init_driver():
     except:
         driver = webdriver.Chrome('./chromedriver.exe', options=options)
     return driver
-
-
-driver = init_driver()
