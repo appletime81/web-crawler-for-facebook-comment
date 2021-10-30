@@ -6,12 +6,12 @@ eel.init('web')
 
 @eel.expose
 def print_processing_status():
-    return 'Processing...'
+    return '執行中...'
 
 
 @eel.expose
 def print_ending_status():
-    return 'Done!! Ready to next precessing.'
+    return '已完成!! 可進行下回操作'
 
 
 @eel.expose
