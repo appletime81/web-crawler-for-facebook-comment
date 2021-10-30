@@ -6,9 +6,11 @@ function getGroupUrl() {
     for (let i = 0; i < urls_len; i++) {
         url_list.push(urls[i].value)
     }
+    processingStart()
     eel.main(url_list)
-    printStatus()
+    processingEnd()
 }
+
 
 function genInputForm() {
     var num = document.getElementById("input-num").value;
@@ -23,15 +25,16 @@ function genInputForm() {
     div.innerHTML = form
 }
 
-// async function printStatus() {
-//     var statusText = await eel.print_processing_status()()
-//     var div = document.getElementById("status-text");
-//     div.innerHTML = statusText
-// }
-function printStatus() {
-    function wrapper(statusText) {
-        var div = document.getElementById("status-text")
-        div.innerHTML = statusText
-    }
-    eel.print_processing_status()(wrapper)
+
+async function processingStart() {
+    var statusText = await eel.print_processing_status()()
+    var div = document.getElementById("status-text")
+    div.innerHTML = statusText
+}
+
+
+async function processingEnd() {
+    var statusText = await eel.print_ending_status()()
+    var div = document.getElementById("status-text")
+    div.innerHTML = statusText
 }
