@@ -12,7 +12,7 @@ def browse_post(driver, url):
         url = url.replace('www.', 'm.')
 
     driver.get(url)
-    print(f'url: {url}')
+    # print(f'url: {url}')
     time.sleep(2)  # 等待網頁跑完
 
     # 把所有留言點擊出來
@@ -20,7 +20,7 @@ def browse_post(driver, url):
     for btn in all_comment_btn:
         try:
             if btn.text in comment_type_list:
-                print('part1')
+                # print('part1')
                 btn.click()
                 time.sleep(1)
                 all_comment_btn = driver.find_elements_by_css_selector("span.d2edcug0.hpfvmrgz.qv66sw1b")
@@ -29,59 +29,47 @@ def browse_post(driver, url):
                         if btn.text == comment_type_list[2]:
                             btn.click()
                             time.sleep(3)
-                            print('I am here')
                             ctrl = 1
                             while ctrl:
                                 show_all_comment_btn = driver.find_elements_by_css_selector("span.d2edcug0.hpfvmrgz.qv66sw1b")
                                 ctrl = detect_more_comment(driver, show_all_comment_btn)
-                    except Exception as e:
-                        print(e)
+                    except Exception:
+                        pass
             else:
                 while True:
-                    print('part2')
+                    # print('part2')
                     show_all_comment_btn = driver.find_elements_by_css_selector("span.d2edcug0.hpfvmrgz.qv66sw1b")
                     ctrl_num = detect_more_comment(driver, show_all_comment_btn)
                     if ctrl_num > 0:
                         pass
                     else:
-                        print("It's break")
+                        # print("It's break")
                         break
                 break
-        except Exception as e:
-            print(e)
+        except Exception:
+            pass
 
 
 def detect_more_comment(driver, show_all_comment_btn):
     count = 0
-    print('--------length-----------')
-    print(len(show_all_comment_btn))
+    # print('--------length-----------')
+    # print(len(show_all_comment_btn))
     for i, btn in enumerate(show_all_comment_btn):
         try:
-            try:
-                print('*************')
-                print(i)
-                print(btn.text)
-            except:
-                print('*************')
-                print(i)
             if (
                 '顯示先前' in btn.text or '檢視另' in btn.text or '查看其他' in btn.text or '則回覆' in btn.text
             ):
                 if '隱藏' not in btn.text:
-                    print('--------------------')
-                    print(btn.text)
                     time.sleep(1)
                     try:
                         driver.execute_script("arguments[0].click();", btn)
                         print('已點擊')
-                    except Exception as e:
-                        print(e)
-
+                    except Exception:
+                        pass
                     time.sleep(0.5)
                     count += 1
-        except Exception as e:
-            print(e)
-    print(f'count: {count}')
+        except Exception:
+            pass
     return count
 
 

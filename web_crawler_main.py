@@ -10,6 +10,7 @@ import time
 def browser_action(driver, group_url, index):
     # open facebook
     driver.get(group_url)
+    print('1. Test')
 
     # 點擊登入按鈕
     try:
@@ -27,6 +28,7 @@ def browser_action(driver, group_url, index):
             pass
 
     time.sleep(2)
+    print('2. Test')
 
     # 輸入帳密
     try:
@@ -39,6 +41,7 @@ def browser_action(driver, group_url, index):
     except Exception:
         pass
 
+    print('3. Test')
     # 捲動
     for i in range(3):
         driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
@@ -56,6 +59,8 @@ def browser_action(driver, group_url, index):
     post_ids = list(set(post_ids))
     post_ids = sorted(post_ids, key=lambda x: int(x), reverse=True)
     post_ids = post_ids[:5]
+    print('--------------post ids-------------------------')
+    pprint(post_ids)
     return post_ids
 
 
@@ -73,12 +78,12 @@ def generate_result(group_url, index):
         get_users(driver, post_ids[i], post_url, index)
 
 
-if __name__ == '__main__':
-    group_urls = get_group_url(
-        ['https://www.facebook.com/groups/999385510116409', 'https://www.facebook.com/youngAug24'])
-    for i, group_url in enumerate(group_urls):
-        try:
-            os.mkdir(str(i + 1))
-        except Exception:
-            pass
-        generate_result(group_url, i + 1)
+# if __name__ == '__main__':
+#     group_urls = get_group_url(
+#         ['https://www.facebook.com/groups/999385510116409', 'https://www.facebook.com/youngAug24'])
+#     for i, group_url in enumerate(group_urls):
+#         try:
+#             os.mkdir(str(i + 1))
+#         except Exception:
+#             pass
+#         generate_result(group_url, i + 1)
