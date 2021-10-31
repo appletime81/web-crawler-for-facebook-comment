@@ -16,7 +16,6 @@ def print_ending_status():
 
 @eel.expose
 def main(group_urls):
-    global status
     group_urls = filter_url(group_urls)
     for i, group_url in enumerate(group_urls):
         try:
