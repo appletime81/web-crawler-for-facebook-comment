@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Tool</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript" src="func.js"></script>
+</head>
+<body>
+<div class="title-part">
+    <h1>排程工具</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div>
+                <form class="input-form" action="index.html">
+                    <div class="input-label">
+                        <label>輸入時間間格</label><br>
+                    </div>
+                    <div>
+                        <input class="input-area" id="input-num" type="text" placeholder="分鐘"><br>
+                    </div>
+                    <div class="input-label">
+                        <label>輸入點擊座標</label><br>
+                    </div>
+                    <div>
+                        <input class="input-area" id="input-position-x" type="text" placeholder="x座標"><br>
+                    </div>
+                    <div>
+                        <input class="input-area" id="input-position-y" type="text" placeholder="y座標"><br>
+                    </div>
+                    <div>
+                        <button type="button" class="btn" onclick="genInputForm()">Start</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn" onclick="exitProcess()">Stop</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col">
+            <div id="form-part"></div>
+        </div>
+        <div class="col">
+            <div id="position"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

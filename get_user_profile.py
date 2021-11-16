@@ -104,3 +104,4 @@ def get_users(driver, post_id, post_url, index):
     user_profile_list = list(set(user_profile_list))
     with open(f'{index}/{post_id}.txt', 'w') as f:
         f.writelines(user_profile_list)
+    return user_profile_list

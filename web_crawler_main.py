@@ -66,6 +66,7 @@ def browser_action(driver, group_url, index):
 
 def generate_result(group_url, index):
     driver = init_driver()
+    total_profile_list = []
 
     # 抓取post url，並排序
     group_url = group_url.replace("www.", "m.")
@@ -75,7 +76,9 @@ def generate_result(group_url, index):
     # 抓取用戶名稱，並儲存
     for i, post_url in enumerate(post_urls):
         browse_post(driver, post_url)
-        get_users(driver, post_ids[i], post_url, index)
+        user_profile_list = get_users(driver, post_ids[i], post_url, index)
+        total_profile_list += user_profile_list
+    return total_profile_list
 
 
 # if __name__ == '__main__':
