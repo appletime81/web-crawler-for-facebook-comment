@@ -4,6 +4,10 @@ import requests
 
 eel.init('web')
 
+with open('token.txt', 'r') as fp:
+    lines = fp.readlines()
+token = lines[0].replace('\n', '')
+
 
 @eel.expose
 def print_processing_status():
@@ -18,13 +22,19 @@ def print_ending_status():
 @eel.expose
 def main(group_urls):
     group_urls = filter_url(group_urls)
+    notify_list = list()
     for i, group_url in enumerate(group_urls):
         try:
             os.mkdir(str(i + 1))
         except Exception:
             pass
         total_profile_list = generate_result(group_url, i + 1)
-        line_notify(total_profile_list)
+        total_profile_list = [f'社團{i + 1} {profile}' for profile in total_profile_list]
+        notify_list.append(total_profile_list)
+
+    for group_profile_list in notify_list:
+        for profile in group_profile_list:
+            line_notify(profile)
 
 
 def filter_url(group_urls):  # 去掉為輸入的欄位傳進的空值
@@ -32,16 +42,13 @@ def filter_url(group_urls):  # 去掉為輸入的欄位傳進的空值
     return group_urls
 
 
-def line_notify(total_profile_list):
+def line_notify(profile):
     headers = {
-        "Authorization": "Bearer " + "BWRzRlw2aHSHZ9CgQiV8JOK7qgjTwa98MCk6kLicQcb",
+        "Authorization": "Bearer " + f"{token}",
         "Content-Type": "application/x-www-form-urlencoded"
     }
-    text = ''
-    for profile in total_profile_list:
-        text += profile
-    params = {"message": text}
+    params = {"message": profile}
     requests.post("https://notify-api.line.me/api/notify", headers=headers, params=params)
 
 
-eel.start('index.html', size=(800, 800), port=8000)
+eel.start('index.html', size=(800, 800), port=8000, mode='edge')

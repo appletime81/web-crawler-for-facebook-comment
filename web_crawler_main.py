@@ -10,7 +10,6 @@ import time
 def browser_action(driver, group_url, index):
     # open facebook
     driver.get(group_url)
-    print('1. Test')
 
     # 點擊登入按鈕
     try:
@@ -28,7 +27,6 @@ def browser_action(driver, group_url, index):
             pass
 
     time.sleep(2)
-    print('2. Test')
 
     # 輸入帳密
     try:
@@ -41,7 +39,6 @@ def browser_action(driver, group_url, index):
     except Exception:
         pass
 
-    print('3. Test')
     # 捲動
     for i in range(3):
         driver.execute_script('window.scrollTo(0, document.body.scrollHeight);')
@@ -54,6 +51,7 @@ def browser_action(driver, group_url, index):
             post_id = article.get_attribute('data-store')
             post_ids.append(post_id.split('.')[2].split(':')[0])
         except:
+            print()
             pass
 
     post_ids = list(set(post_ids))
@@ -79,14 +77,3 @@ def generate_result(group_url, index):
         user_profile_list = get_users(driver, post_ids[i], post_url, index)
         total_profile_list += user_profile_list
     return total_profile_list
-
-
-# if __name__ == '__main__':
-#     group_urls = get_group_url(
-#         ['https://www.facebook.com/groups/999385510116409', 'https://www.facebook.com/youngAug24'])
-#     for i, group_url in enumerate(group_urls):
-#         try:
-#             os.mkdir(str(i + 1))
-#         except Exception:
-#             pass
-#         generate_result(group_url, i + 1)

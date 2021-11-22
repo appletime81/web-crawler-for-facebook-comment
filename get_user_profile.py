@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import time
 import re
-from pprint import pprint
 
 # global variables
 comment_type_list = ['最相關留言', '最新', '所有留言']
@@ -12,7 +11,6 @@ def browse_post(driver, url):
         url = url.replace('www.', 'm.')
 
     driver.get(url)
-    # print(f'url: {url}')
     time.sleep(2)  # 等待網頁跑完
 
     # 把所有留言點擊出來
@@ -20,7 +18,6 @@ def browse_post(driver, url):
     for btn in all_comment_btn:
         try:
             if btn.text in comment_type_list:
-                # print('part1')
                 btn.click()
                 time.sleep(1)
                 all_comment_btn = driver.find_elements_by_css_selector("span.d2edcug0.hpfvmrgz.qv66sw1b")
@@ -37,13 +34,11 @@ def browse_post(driver, url):
                         pass
             else:
                 while True:
-                    # print('part2')
                     show_all_comment_btn = driver.find_elements_by_css_selector("span.d2edcug0.hpfvmrgz.qv66sw1b")
                     ctrl_num = detect_more_comment(driver, show_all_comment_btn)
                     if ctrl_num > 0:
                         pass
                     else:
-                        # print("It's break")
                         break
                 break
         except Exception:
@@ -52,8 +47,6 @@ def browse_post(driver, url):
 
 def detect_more_comment(driver, show_all_comment_btn):
     count = 0
-    # print('--------length-----------')
-    # print(len(show_all_comment_btn))
     for i, btn in enumerate(show_all_comment_btn):
         try:
             if (
